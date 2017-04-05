@@ -30,7 +30,8 @@ object Test {
         val ids3 = e select() from BOOK fetchArray(BOOK.ID, classOf[Long])
 
         val map1 = e selectFrom BOOK fetch() intoMap(BOOK.ID)
-        val map2 =
+        val map2 = e selectFrom BOOK fetchMap(BOOK.ID)
+        val map3 = e selectFrom BOOK fetch() intoMap(BOOK.ID, BOOK.TITLE)
     }
 
 }

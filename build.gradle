@@ -68,8 +68,10 @@ task generator {
 
 // Run the code generator
 // ----------------------
-        GenerationTool.main(
-                JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.util.jaxb.Configuration.class)
+        def str = writer.toString()
+        println str
+        GenerationTool.generate(
+                JAXB.unmarshal(new StringReader(str), org.jooq.util.jaxb.Configuration.class)
         )
     }
 }
