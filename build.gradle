@@ -40,31 +40,36 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
+task generator {
+
+    doLast {
 // Use your favourite XML builder to construct the code generation configuration file
 // ----------------------------------------------------------------------------------
-def writer = new StringWriter()
-def xml = new groovy.xml.MarkupBuilder(writer)
-        .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.9.0.xsd') {
-    jdbc() {
-        driver('com.mysql.jdbc.Driver')
-        url('jdbc:mysql://192.168.56.101:3306/test')
-        user('root')
-        password('example')
-    }
-    generator() {
-        database() {
+        def writer = new StringWriter()
+        def xml = new groovy.xml.MarkupBuilder(writer)
+                .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.9.0.xsd') {
+            jdbc() {
+                driver('com.mysql.jdbc.Driver')
+                url('jdbc:mysql://192.168.56.101:3306/test')
+                user('root')
+                password('example')
+            }
+            generator() {
+                database() {
+                }
+                generate() {
+                }
+                target() {
+                    packageName('jooq-test')
+                    directory('src/main/java')
+                }
+            }
         }
-        generate() {
-        }
-        target() {
-            packageName('org.jooq.example.gradle.db')
-            directory('src/main/java')
-        }
-    }
-}
 
 // Run the code generator
 // ----------------------
-GenerationTool.main(
-        JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.util.jaxb.Configuration.class)
-)
+        GenerationTool.main(
+                JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.util.jaxb.Configuration.class)
+        )
+    }
+}
