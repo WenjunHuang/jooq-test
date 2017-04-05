@@ -1,0 +1,2 @@
+INSERT INTO test.author (id, first_name, last_name, date_of_birth, year_of_birth, distinguished) VALUES (1, 'George', 'Orwell', '1903-06-26', 1903, null);
+INSERT INTO test.author (id, first_name, last_name, date_of_birth, year_of_birth, distinguished) VALUES (2, 'Paulo', 'Coelho', '1947-08-24', 1947, null);
